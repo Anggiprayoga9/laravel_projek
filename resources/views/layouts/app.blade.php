@@ -23,7 +23,7 @@
 <body class="{{ $class ?? '' }}">
 
     @guest
-    <!-- @include('layouts.navbars.guest.navbar') -->
+    @include('layouts.navbars.guest.navbar')
     @yield('content')
     @endguest
 
@@ -101,7 +101,7 @@
                 <div class="modal-header bg-danger">
                     <h5 class="modal-title text-white" id="exampleModalLabel"> End Session</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <!-- <span aria-hidden="true">&times;</span> -->
                     </button>
                 </div>
                 <div class="modal-body">
