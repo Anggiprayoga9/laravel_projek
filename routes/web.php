@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,4 +27,12 @@ Route::controller(LoginRegisterController::class)->group(function() {
     Route::post('/authenticate', 'authenticate')->name('authenticate');
     Route::get('/dashboard', 'dashboard')->name('home');
     Route::post('/logout', 'logout')->name('logout');
+});
+
+
+Route::get('/profile', function () {
+    return view('pages.profiles');
+  })->name('user-info');
+
+Route::controller(UserController::class)->group(function() {
 });

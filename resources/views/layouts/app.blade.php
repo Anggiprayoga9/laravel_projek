@@ -30,13 +30,13 @@
 
     @auth
 
-    @if (in_array(request()->route()->getName(), ['sign-in-static', 'sign-up-static', 'login', 'register', 'recover-password', 'rtl', 'virtual-reality']))
+    @if (in_array(request()->route()->getName(), ['login', 'register', 'recover-password']))
     @yield('content')
     @else
-    @if (!in_array(request()->route()->getName(), ['profile', 'profile-static']))
+    @if (in_array(request()->route()->getName(), ['user']))
     <div class="min-height-300 bg-primary position-absolute w-100"></div>
-    @elseif (in_array(request()->route()->getName(), ['profile-static', 'profile']))
-    <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
+    @else (in_array(request()->route()->getName(), ['profile']))
+    <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://images.unsplash.com/photo-1528475422887-f47817e10712?q=80&w=2013&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); background-position-y: 50%;">
         <span class="mask bg-primary opacity-6"></span>
     </div>
     @endif
@@ -92,7 +92,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="argon/assets/js/argon-dashboard.js"></script>
-    @stack('js');
+    @stack('js')
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
