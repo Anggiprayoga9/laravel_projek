@@ -20,34 +20,34 @@
     <link id="pagestyle" href="argon/assets/css/argon-dashboard.css" rel="stylesheet" />
 </head>
 
-<body>
+<body class="{{ $class ?? '' }}">
 
     @guest
-    <nav class="navbar navbar-expand-lg bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="{{ URL('/') }}">WELCOME</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('login')) ? 'active' : '' }}" href="{{ route('login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('register')) ? 'active' : '' }}" href="{{ route('register') }}">Register</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <!-- @include('layouts.navbars.guest.navbar') -->
     @yield('content')
     @endguest
 
 
     @auth
-    @if (in_array(request()->route()->getName(), ['forget-password']))
-    <nav class="navbar navbar-expand-lg bg-light">
+
+    @if (in_array(request()->route()->getName(), ['sign-in-static', 'sign-up-static', 'login', 'register', 'recover-password', 'rtl', 'virtual-reality']))
+    @yield('content')
+    @else
+    @if (!in_array(request()->route()->getName(), ['profile', 'profile-static']))
+    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+    @elseif (in_array(request()->route()->getName(), ['profile-static', 'profile']))
+    <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
+        <span class="mask bg-primary opacity-6"></span>
+    </div>
+    @endif
+    @include('layouts.navbars.auth.sidenav')
+    <main class="main-content border-radius-lg">
+        @yield('content')
+    </main>
+    @include('components.fixed-plugin')
+    @endif
+
+    <!-- <nav class="navbar navbar-expand-lg bg-light">
         <div class="container">
             <a class="navbar-brand" href="{{ URL('/') }}">Custom Login Register</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,16 +71,7 @@
                 </ul>
             </div>
         </div>
-    </nav>
-    @yield('content')
-    @else
-
-    @include('layouts.navbars.auth.sidenav')
-    <main class="main-content border-radius-lg">
-        @yield('content')
-    </main>
-    @include('components.fixed-plugin')
-    @endif
+    </nav> -->
     @endauth
 
     <!--   Core JS Files   -->
@@ -102,6 +93,32 @@
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="argon/assets/js/argon-dashboard.js"></script>
     @stack('js');
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-danger">
+                    <h5 class="modal-title text-white" id="exampleModalLabel"> End Session</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure for exit ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">No</button>
+                    <a type="button" class="btn bg-gradient-danger" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">Yes</a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                        @csrf
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>
