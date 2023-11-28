@@ -75,6 +75,7 @@
     @endauth
 
     <!--   Core JS Files   -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="argon/assets/js/core/popper.min.js"></script>
     <script src="argon/assets/js/core/bootstrap.min.js"></script>
     <script src="argon/assets/js/plugins/perfect-scrollbar.min.js"></script>
