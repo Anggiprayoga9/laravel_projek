@@ -9,7 +9,6 @@
     <div class="row">
         <div class="col-md-8">
             <div class="card">
-
                 <div class="card-header d-flex pb-0 p-3">
                     <h6 class="my-auto">Settings</h6>
                     <div class="nav-wrapper ms-auto position-relative end-0 w-60">
@@ -21,7 +20,7 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="tab" href="#change-password" role="tab" aria-current="change-password">
-                                    <i class="ni ni-laptop text-sm me-2"></i> Change Password
+                                    <i class="ni ni-key-25 text-sm me-2"></i> Change Password
                                 </a>
                             </li>
                         </ul>
@@ -29,7 +28,7 @@
                 </div>
                 <div class="card-body p-3 mt-2">
                     <div class="tab-content" id="v-pills-tabContent">
-                        <div class="tab-pane fade position-relative height-auto border-radius-lg" id="profile-setting" role="tabpanel">
+                        <div class="tab-pane fade position-relative height-auto border-radius-lg active show" id="profile-setting" role="tabpanel">
                             <div class="col-md-12 ">
                                 <form role="form" method="POST" action="" enctype="multipart/form-data">
                                     @csrf
@@ -60,31 +59,21 @@
                                             <hr class="horizontal dark">
                                             <p class="text-uppercase text-sm">Contact Information</p>
                                             <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="form-group">
-                                                        <label for="example-text-input" class="form-control-label">Address</label>
-                                                        <input class="form-control" type="text" name="address" value="{{ old('address', auth()->user()->address) }}">
-                                                    </div>
+                                                <div class="col-md-4 col-6">
+                                                    <label class="form-label" for="exampleFormControlSelect1">I'm</label>
+                                                    <select class="form-control" id="exampleFormControlSelect1">
+                                                        <option selected="true" disabled="disabled" value="">Choose</option>
+                                                        <option>Female</option>
+                                                        <option>Male</option>
+                                                    </select>
                                                 </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="example-text-input" class="form-control-label">City</label>
-                                                        <input class="form-control" type="text" name="city" value="{{ old('city', auth()->user()->city) }}">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="example-text-input" class="form-control-label">Country</label>
-                                                        <input class="form-control" type="text" name="country" value="{{ old('country', auth()->user()->country) }}">
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="form-group">
-                                                        <label for="example-text-input" class="form-control-label">Postal code</label>
-                                                        <input class="form-control" type="text" name="postal" value="{{ old('postal', auth()->user()->postal) }}">
-                                                    </div>
+                                                <div class="col-md-8 col-6">
+                                                    <label class="form-label">Birth Date</label>
+                                                    <input class="form-control" type="date" value="" id="date-input">
                                                 </div>
                                             </div>
+
+
                                             <hr class="horizontal dark">
                                             <p class="text-uppercase text-sm">About me</p>
                                             <div class="row">

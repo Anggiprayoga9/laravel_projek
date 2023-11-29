@@ -35,4 +35,10 @@ Route::get('/profile', function () {
   })->name('user-info');
 
 Route::controller(UserController::class)->group(function() {
+    Route::post('/profile', 'update')->name('update-profile');
 });
+
+Route::get('/user', function () {
+    return view('pages.users');
+  })->name('user-management');
+
